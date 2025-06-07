@@ -43,7 +43,7 @@ const footerNavItems: NavItem[] = [
     },
     {
         title: 'Documentation',
-        href: 'https://github.com/GentilOfficial/Task-Manager',
+        href: 'https://gentilofficial.github.io/Task-Manager',
         icon: BookOpen,
     },
 ];
