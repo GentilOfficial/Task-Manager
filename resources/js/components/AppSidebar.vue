@@ -5,7 +5,7 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid, FolderOpen, LayoutDashboard, FolderClosed, LayoutList, ListTodo, BookUser, FileUser } from 'lucide-vue-next';
+import { FolderGit2, BookOpen, LayoutGrid, FolderOpen, LayoutDashboard, FolderClosed, LayoutList, ListTodo, BookUser, FileUser } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
@@ -36,7 +36,16 @@ const mainNavItems: NavItem[] = [
 ];
 
 const footerNavItems: NavItem[] = [
-    //
+    {
+        title: 'GitHub Repository',
+        href: 'https://github.com/GentilOfficial/Task-Manager',
+        icon: FolderGit2,
+    },
+    {
+        title: 'Documentation',
+        href: 'https://github.com/GentilOfficial/Task-Manager',
+        icon: BookOpen,
+    },
 ];
 </script>
 
