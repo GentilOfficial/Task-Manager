@@ -1,12 +1,19 @@
+<script setup lang="ts">
+const videoSrc = `/backgrounds/auth-split-background-video.webm`;
+const posterSrc = `/backgrounds/auth-split-background-poster.webp`;
+</script>
+
 <template>
   <video
-    class="absolute inset-0 h-full w-full object-cover bg-black"
+    class="absolute inset-0 h-full w-full object-cover bg-black animate animate-in fade-in duration-500"
     autoplay
     muted
     loop
     playsinline
     preload="auto"
+    :poster="posterSrc"
+    aria-hidden="true"
   >
-    <source src="/videos/auth-background.mp4" type="video/mp4" />
+    <source :src="videoSrc" type="video/webm" />
   </video>
 </template>
