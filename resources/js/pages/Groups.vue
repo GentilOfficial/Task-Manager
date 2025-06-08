@@ -10,8 +10,7 @@ import {
 } from '@/components/ui/tabs'
 import Separator from '@/components/ui/separator/Separator.vue';
 import { BookHeart, BookMarked, BookUser } from 'lucide-vue-next';
-import MyGroupsTable from '../components/groups/MyGroupsTable.vue';
-import AllGroupsTable from '../components/groups/AllGroupsTable.vue';
+import GroupsGrid from '@/components/GroupsGrid.vue';
 import LoadingSpinner from '@/components/LoadingSpinner.vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -50,22 +49,22 @@ defineProps({
                     </TabsTrigger>
                 </TabsList>
                 <TabsContent value="my-groups" class="flex flex-col gap-4">
-                    <!-- <WhenVisible data="myGroups">
+                    <WhenVisible data="myGroups">
                         <template #fallback>
                             <div class="flex items-center justify-center h-20">
                                 <LoadingSpinner />
                             </div>
                         </template>
-                        <MyGroupsTable :myGroups="myGroups" />
-                    </WhenVisible> -->
-                    <Deferred data="myGroups">
+                        <GroupsGrid :groups="myGroups" />
+                    </WhenVisible>
+                    <!-- <Deferred data="myGroups">
                         <template #fallback>
                             <div class="flex items-center justify-center h-20">
                                 <LoadingSpinner />
                             </div>
                         </template>
-                        <MyGroupsTable :myGroups="myGroups" />
-                    </Deferred>
+                        <GroupsGrid :groups="myGroups" />
+                    </Deferred> -->
                 </TabsContent>
                 <TabsContent value="all-groups" class="flex flex-col gap-4">
                     <WhenVisible data="allGroups">
@@ -74,7 +73,7 @@ defineProps({
                                 <LoadingSpinner />
                             </div>
                         </template>
-                        <AllGroupsTable :groups="allGroups" />
+                        <GroupsGrid :groups="allGroups" />
                     </WhenVisible>
                     <!-- <Deferred data="allGroups">
                         <template #fallback>
@@ -82,7 +81,7 @@ defineProps({
                                 <LoadingSpinner />
                             </div>
                         </template>
-                        <AllGroupsTable :allGroups="allGroups" />
+                        <GroupsGrid :allGroups="allGroups" />
                     </Deferred> -->
                 </TabsContent>
             </Tabs>

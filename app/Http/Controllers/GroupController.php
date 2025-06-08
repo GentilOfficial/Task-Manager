@@ -15,14 +15,12 @@ class GroupController extends Controller
     public function index()
     {
         return Inertia::render('Groups', [
-            'myGroups' => Inertia::defer(function () {
-                sleep(2);
-                return Auth::user()->groups;
+            'myGroups' => Inertia::optional(function () {
+                return Auth::user()->groups()->with('users')->get();
             }),
 
             'allGroups' => Inertia::optional(function () {
-                sleep(10);
-                return Group::all();
+                return Group::with('users')->get();
             }),
         ]);
     }
