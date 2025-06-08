@@ -27,11 +27,18 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
-            if (! app()->environment(['local', 'testing']) && in_array($response->getStatusCode(), [401, 402, 403, 404, 429, 500, 503])) {
-                return Inertia::render('ErrorPage', ['status' => $response->getStatusCode()])
-                    ->toResponse($request)
-                    ->setStatusCode($response->getStatusCode());
-            } elseif ($response->getStatusCode() === 419) {
+            if (app()->hasDebugModeEnabled() && in_array($response->getStatusCode(), [401, 402, 403, 404, 429, 500, 503])) {
+
+                $sharedProps = (new HandleInertiaRequests)->share($request);
+
+                return Inertia::render('ErrorPage', array_merge($sharedProps, [
+                    'status' => $response->getStatusCode(),
+                ]))
+                ->toResponse($request)
+                ->setStatusCode($response->getStatusCode());
+            }
+
+            if ($response->getStatusCode() === 419) {
                 return back()->with([
                     'message' => 'The page expired, please try again.',
                 ]);
