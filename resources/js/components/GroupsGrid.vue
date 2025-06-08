@@ -22,7 +22,7 @@ defineProps<{
 
 <template>
   <div class="flex flex-col gap-4">
-    <div class="grid auto-rows-min gap-4 md:grid-cols-3">
+    <div class="grid auto-rows-min gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       <div v-for="(group, index) in groups" :key="index">
         <Card>
           <CardHeader>

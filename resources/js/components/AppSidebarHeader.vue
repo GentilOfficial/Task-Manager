@@ -2,8 +2,7 @@
 import Breadcrumbs from '@/components/Breadcrumbs.vue';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { getInitials } from '@/composables/useInitials';
+import UserInfo from '@/components/UserInfo.vue';
 import { Button } from '@/components/ui/button';
 import UserMenuContent from '@/components/UserMenuContent.vue';
 import { usePage } from '@inertiajs/vue3';
@@ -35,14 +34,9 @@ withDefaults(defineProps<{
                         <Button
                             variant="ghost"
                             size="icon"
-                            class="relative size-10 w-auto rounded-lg p-1 focus-within:ring-2 focus-within:ring-primary"
+                            class="relative size-10 w-auto rounded-full p-1 focus-within:ring-2 focus-within:ring-primary hover:cursor-pointer"
                         >
-                            <Avatar class="size-8 overflow-hidden rounded-lg">
-                                <AvatarImage v-if="auth.user.avatar" :src="auth.user.avatar" :alt="auth.user.name" />
-                                <AvatarFallback class="rounded-lg text-black dark:text-white">
-                                    {{ getInitials(auth.user?.name) }}
-                                </AvatarFallback>
-                            </Avatar>
+                            <UserInfo :user="auth.user" :show-info="false" />
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" class="w-56">
