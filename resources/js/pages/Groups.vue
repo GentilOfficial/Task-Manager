@@ -1,17 +1,12 @@
 <script setup lang="ts">
-import AppLayout from '@/layouts/AppLayout.vue';
-import { type BreadcrumbItem } from '@/types';
-import { Head, WhenVisible, Deferred } from '@inertiajs/vue3';
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@/components/ui/tabs'
-import Separator from '@/components/ui/separator/Separator.vue';
-import { BookHeart, BookMarked, BookUser } from 'lucide-vue-next';
 import GroupsGrid from '@/components/GroupsGrid.vue';
 import LoadingSpinner from '@/components/LoadingSpinner.vue';
+import Separator from '@/components/ui/separator/Separator.vue';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import AppLayout from '@/layouts/AppLayout.vue';
+import { type BreadcrumbItem } from '@/types';
+import { Head, WhenVisible } from '@inertiajs/vue3';
+import { BookHeart, BookMarked, BookUser } from 'lucide-vue-next';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -21,8 +16,8 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 defineProps({
-  myGroups: Object,
-  allGroups: Object,
+    myGroups: Object,
+    allGroups: Object,
 });
 </script>
 
@@ -31,13 +26,13 @@ defineProps({
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-            <h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl flex items-center">
-                <BookUser class="size-9 lg:size-12 mr-2" />
+            <h1 class="flex scroll-m-20 items-center text-4xl font-extrabold tracking-tight lg:text-5xl">
+                <BookUser class="mr-2 size-9 lg:size-12" />
                 Groups
             </h1>
-            <Separator/>
+            <Separator />
             <Tabs default-value="my-groups" class="w-full gap-4">
-                <TabsList class="flex w-full items-center justify-between gap-1 max-w-xl mx-auto">
+                <TabsList class="mx-auto flex w-full max-w-xl items-center justify-between gap-1">
                     <TabsTrigger value="my-groups" class="hover:cursor-pointer">
                         <BookHeart />
                         My Groups
@@ -51,7 +46,7 @@ defineProps({
                 <TabsContent value="my-groups" class="flex flex-col gap-4">
                     <WhenVisible data="myGroups">
                         <template #fallback>
-                            <div class="flex items-center justify-center h-20">
+                            <div class="flex h-20 items-center justify-center">
                                 <LoadingSpinner />
                             </div>
                         </template>
@@ -69,7 +64,7 @@ defineProps({
                 <TabsContent value="all-groups" class="flex flex-col gap-4">
                     <WhenVisible data="allGroups">
                         <template #fallback>
-                            <div class="flex items-center justify-center h-20">
+                            <div class="flex h-20 items-center justify-center">
                                 <LoadingSpinner />
                             </div>
                         </template>
