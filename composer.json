@@ -1,8 +1,8 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/vue-starter-kit",
+    "name": "gentilofficial/task-manager",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "A Laravel-based task manager using laravel/vue-starter-kit with Vue.js, Inertia.js and Tailwind CSS.",
     "keywords": [
         "laravel",
         "framework"

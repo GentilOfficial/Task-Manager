@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use Auth;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,7 +14,15 @@ class GroupController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Groups');
+        return Inertia::render('Groups', [
+            'myGroups' => Inertia::optional(function () {
+                return Auth::user()->groups()->with('users')->get();
+            }),
+
+            'allGroups' => Inertia::optional(function () {
+                return Group::with('users')->get();
+            }),
+        ]);
     }
 
     /**
