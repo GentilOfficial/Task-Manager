@@ -36,4 +36,40 @@ export interface User {
     updated_at: string;
 }
 
+export interface Group {
+    id: number;
+    name: string;
+    description: string;
+    owner_id: number;
+    owner: User;
+    members: User[];
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Project {
+    id: number;
+    name: string;
+    description?: string;
+    owner_id: number;
+    owner: User;
+    users: User[];
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Task {
+    id: number;
+    title: string;
+    description?: string;
+    project_id: number;
+    project: Project;
+    starting_date: string;
+    ending_date: string;
+    status: 'pending' | 'in_progress' | 'completed' | 'archived';
+    assignedTo: User[];
+    created_at: string;
+    updated_at: string;
+}
+
 export type BreadcrumbItemType = BreadcrumbItem;
