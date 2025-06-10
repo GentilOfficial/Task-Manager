@@ -46,22 +46,29 @@ class User extends Authenticatable
         ];
     }
 
+    public function ownedGroups()
+    {
+        return $this->hasMany(Group::class, 'owner_id');
+    }
+
+    public function ownedProjects()
+    {
+        return $this->hasMany(Project::class, 'owner_id');
+    }
+
     public function groups()
     {
         return $this->belongsToMany(Group::class)->withTimestamps();
     }
 
-    public function tasks()
-    {
-        return $this->morphToMany(Task::class, 'assignable', 'task_assignments')
-                    ->withPivot('role_id')
-                    ->withTimestamps();
-    }
-
     public function projects()
     {
-        return $this->morphToMany(Project::class, 'assignable', 'project_assignments')
-                    ->withPivot('role_id')
-                    ->withTimestamps();
+        return $this->belongsToMany(Project::class)->withTimestamps();
     }
+
+    public function assignedTasks()
+    {
+        return $this->belongsToMany(Task::class)->withTimestamps();
+    }
+
 }

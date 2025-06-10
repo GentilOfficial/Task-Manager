@@ -23,17 +23,8 @@ class Task extends Model
         return $this->belongsTo(Project::class);
     }
 
-    public function users()
+    public function assignedTo()
     {
-        return $this->morphedByMany(User::class, 'assignable', 'task_assignments')
-                    ->withPivot('role_id')
-                    ->withTimestamps();
-    }
-
-    public function groups()
-    {
-        return $this->morphedByMany(Group::class, 'assignable', 'task_assignments')
-                    ->withPivot('role_id')
-                    ->withTimestamps();
+        return $this->belongsToMany(User::class)->withTimestamps();
     }
 }

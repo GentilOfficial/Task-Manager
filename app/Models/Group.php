@@ -9,24 +9,20 @@ class Group extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'description', 'owner_id'];
 
-    public function users()
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    public function members()
     {
         return $this->belongsToMany(User::class)->withTimestamps();
-    }
-
-    public function tasks()
-    {
-        return $this->morphToMany(Task::class, 'assignable', 'task_assignments')
-                    ->withPivot('role_id')
-                    ->withTimestamps();
-    }
-
-    public function projects()
-    {
-        return $this->morphToMany(Project::class, 'assignable', 'project_assignments')
-                    ->withPivot('role_id')
-                    ->withTimestamps();
     }
 }

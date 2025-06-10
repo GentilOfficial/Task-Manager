@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('project_assignments', function (Blueprint $table) {
+        Schema::create('project_user', function (Blueprint $table) {
             $table->id();
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
-            $table->unsignedBigInteger('assignable_id');
-            $table->string('assignable_type');
-            $table->foreignId('role_id')->constrained('roles')->onDelete('restrict');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
 
-            $table->unique(['project_id', 'assignable_id', 'assignable_type'], 'unique_project_assignment');
+            $table->unique(['project_id', 'user_id']);
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('project_assignments');
+        Schema::dropIfExists('project_user');
     }
 };
