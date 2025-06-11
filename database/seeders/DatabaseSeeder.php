@@ -2,13 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Role;
 use App\Models\Group;
 use App\Models\User;
 use App\Models\Project;
-use App\Models\ProjectAssignment;
 use App\Models\Task;
-use App\Models\TaskAssignment;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Hash;
 use Illuminate\Database\Seeder;
@@ -20,9 +17,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $roles = collect(['manager', 'collaborator', 'viewer'])
-            ->map(fn($name) => Role::firstOrCreate(['name' => $name]));
-
         $devUser = User::create([
             'name' => "Development User",
             'email' => "dev@user.com",
@@ -34,76 +28,38 @@ class DatabaseSeeder extends Seeder
 
         $users = $users->prepend($devUser);
 
-        $groups = Group::factory(20)->create();
+        $groups = Group::factory(100)->make()->each(function ($group) use ($users) {
+            $group->owner_id = $users->random()->id;
+            $group->save();
+        });
 
         foreach ($groups as $group) {
-            $group->users()->sync($users->random(rand(2, 20))->pluck('id'));
+            $group->members()->sync($users->random(rand(2, 20))->pluck('id'));
         }
 
-        $projects = Project::factory(50)->create();
+        $projects = Project::factory(20)->make()->each(function ($project) use ($users) {
+            $project->owner_id = $users->random()->id;
+            $project->save();
+        });
+
+        foreach ($projects as $project) {
+            $project->users()->sync($users->random(rand(2, 20))->pluck('id'));
+        }
 
         foreach ($projects as $project) {
 
-            $assignedGroups = $groups->random(rand(0, 5));
-            foreach ($assignedGroups as $group) {
-                ProjectAssignment::create([
-                    'project_id'      => $project->id,
-                    'assignable_id'   => $group->id,
-                    'assignable_type' => Group::class,
-                    'role_id'         => $roles->random()->id,
-                ]);
-            }
-
-            $assignedUsers = $users->random(rand(1, 10));
-            foreach ($assignedUsers as $user) {
-                ProjectAssignment::create([
-                    'project_id'      => $project->id,
-                    'assignable_id'   => $user->id,
-                    'assignable_type' => User::class,
-                    'role_id'         => $roles->random()->id,
-                ]);
-            }
+            $randomUsers = $users->random(rand(1, 10));
+            $project->users()->sync(collect($randomUsers)->pluck('id'));
 
             $tasks = Task::factory(rand(5, 10))->create([
                 'project_id' => $project->id,
             ]);
 
-            $projectUsers = $project->users;
-            $projectGroups = $project->groups;
-
             foreach ($tasks as $task) {
-                $assignedUserCount = rand(0, 5);
-                $assignedGroupCount = rand(0, 5);
-
-                if ($assignedUserCount === 0 && $assignedGroupCount === 0) {
-                    $assignedUserCount = 1;
-                }
-
-                $usersToAssign = $projectUsers->isNotEmpty()
-                    ? $projectUsers->random(min($assignedUserCount, $projectUsers->count()))
-                    : collect();
-
-                foreach ($usersToAssign as $user) {
-                    TaskAssignment::create([
-                        'task_id'         => $task->id,
-                        'assignable_id'   => $user->id,
-                        'assignable_type' => User::class,
-                        'role_id'         => $roles->random()->id,
-                    ]);
-                }
-
-                $groupsToAssign = $projectGroups->isNotEmpty()
-                    ? $projectGroups->random(min($assignedGroupCount, $projectGroups->count()))
-                    : collect();
-
-                foreach ($groupsToAssign as $group) {
-                    TaskAssignment::create([
-                        'task_id'         => $task->id,
-                        'assignable_id'   => $group->id,
-                        'assignable_type' => Group::class,
-                        'role_id'         => $roles->random()->id,
-                    ]);
-                }
+                $projectUsers = $project->users;
+                $task->assignedTo()->sync(
+                    $projectUsers->random(min($projectUsers->count(), rand(1, 5)))->pluck('id')
+                );
             }
         }
     }

@@ -8,24 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'description', 'owner_id'];
+
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withTimestamps();
+    }
 
     public function tasks()
     {
         return $this->hasMany(Task::class);
     }
 
-    public function users()
-    {
-        return $this->morphedByMany(User::class, 'assignable', 'project_assignments')
-                    ->withPivot('role_id')
-                    ->withTimestamps();
-    }
-
-    public function groups()
-    {
-        return $this->morphedByMany(Group::class, 'assignable', 'project_assignments')
-                    ->withPivot('role_id')
-                    ->withTimestamps();
-    }
 }

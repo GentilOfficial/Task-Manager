@@ -4,26 +4,36 @@ import LoadingSpinner from '@/components/LoadingSpinner.vue';
 import Separator from '@/components/ui/separator/Separator.vue';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import AppLayout from '@/layouts/AppLayout.vue';
-import { type BreadcrumbItem } from '@/types';
+import { type BreadcrumbItem, Group } from '@/types';
 import { Head, WhenVisible } from '@inertiajs/vue3';
 import { BookHeart, BookMarked, BookUser } from 'lucide-vue-next';
+import { computed, ref } from 'vue';
 
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Groups',
-        href: '/groups',
-    },
-];
+const breadcrumbs: BreadcrumbItem[] = [{ title: 'Groups', href: '/groups' }];
 
-defineProps({
-    myGroups: Object,
-    allGroups: Object,
-});
+const searchOwned = ref('');
+const searchMember = ref('');
+const searchAll = ref('');
+
+const props = defineProps<{
+    ownedGroups?: Group[];
+    memberGroups?: Group[];
+    allGroups?: Group[];
+}>();
+
+function filterGroups(groups: Group[] = [], search: string): Group[] {
+    if (!search) return groups;
+    const s = search.trim().toLowerCase();
+    return groups.filter((g) => g.name?.toLowerCase().includes(s));
+}
+
+const filteredOwnedGroups = computed(() => filterGroups(props.ownedGroups ?? [], searchOwned.value));
+const filteredMemberGroups = computed(() => filterGroups(props.memberGroups ?? [], searchMember.value));
+const filteredAllGroups = computed(() => filterGroups(props.allGroups ?? [], searchAll.value));
 </script>
 
 <template>
     <Head title="Groups" />
-
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
             <h1 class="flex scroll-m-20 items-center text-4xl font-extrabold tracking-tight lg:text-5xl">
@@ -44,40 +54,38 @@ defineProps({
                     </TabsTrigger>
                 </TabsList>
                 <TabsContent value="my-groups" class="flex flex-col gap-4">
-                    <WhenVisible data="myGroups">
+                    <h2 class="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">Owned Groups</h2>
+                    <input v-model="searchOwned" type="text" placeholder="Search groups..." class="mb-4 rounded border px-3 py-2" />
+                    <WhenVisible data="ownedGroups">
                         <template #fallback>
                             <div class="flex h-20 items-center justify-center">
                                 <LoadingSpinner />
                             </div>
                         </template>
-                        <GroupsGrid :groups="myGroups" />
+                        <GroupsGrid :groups="filteredOwnedGroups" />
                     </WhenVisible>
-                    <!-- <Deferred data="myGroups">
+                    <h2 class="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">Groups Member</h2>
+                    <input v-model="searchMember" type="text" placeholder="Search groups..." class="mb-4 rounded border px-3 py-2" />
+                    <WhenVisible data="memberGroups">
                         <template #fallback>
-                            <div class="flex items-center justify-center h-20">
+                            <div class="flex h-20 items-center justify-center">
                                 <LoadingSpinner />
                             </div>
                         </template>
-                        <GroupsGrid :groups="myGroups" />
-                    </Deferred> -->
+                        <GroupsGrid :groups="filteredMemberGroups" />
+                    </WhenVisible>
                 </TabsContent>
                 <TabsContent value="all-groups" class="flex flex-col gap-4">
+                    <h2 class="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">All Groups</h2>
+                    <input v-model="searchAll" type="text" placeholder="Search groups..." class="mb-4 rounded border px-3 py-2" />
                     <WhenVisible data="allGroups">
                         <template #fallback>
                             <div class="flex h-20 items-center justify-center">
                                 <LoadingSpinner />
                             </div>
                         </template>
-                        <GroupsGrid :groups="allGroups" />
+                        <GroupsGrid :groups="filteredAllGroups" />
                     </WhenVisible>
-                    <!-- <Deferred data="allGroups">
-                        <template #fallback>
-                            <div class="flex items-center justify-center h-20">
-                                <LoadingSpinner />
-                            </div>
-                        </template>
-                        <GroupsGrid :allGroups="allGroups" />
-                    </Deferred> -->
                 </TabsContent>
             </Tabs>
         </div>
