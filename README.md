@@ -21,7 +21,7 @@ With this app, you can create groups, start projects, assign tasks to people or 
 * 📁 Create new projects
 * 🔗 Link projects to specific users or entire groups
 * ✅ Add tasks to projects
-* 👨‍👩‍👧‍👦 Assign tasks to individual users or full groups
+* 👨‍👩‍👧‍👦 Assign tasks to individual users
 * 🧾 View a personal list of tasks assigned to you
 
 ---
@@ -103,7 +103,7 @@ composer run dev
 ### ✅ Tasks
 
 * Add tasks inside each project
-* Assign tasks to specific users or groups
+* Assign tasks to specific users
 * Track task status and progress
 
 ### 📋 Assigned Tasks
