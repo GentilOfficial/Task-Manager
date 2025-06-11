@@ -16,7 +16,7 @@ class TaskFactory extends Factory
      */
     public function definition(): array
     {
-        $statuses = ['todo', 'in_progress', 'done'];
+        $statuses = ['pending', 'in_progress', 'completed', 'archived'];
 
         return [
             'title' => $this->faker->sentence(4),
