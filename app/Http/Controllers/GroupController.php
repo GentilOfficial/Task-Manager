@@ -12,18 +12,12 @@ class GroupController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         return Inertia::render('Groups', [
-            'ownedGroups' => Inertia::optional(function () {
-                return Auth::user()->ownedGroups()->with('members')->get();
-            }),
-            'memberGroups' => Inertia::optional(function () {
-                return Auth::user()->groups()->with('members')->get();
-            }),
-            'allGroups' => Inertia::optional(function () {
-                return Group::with('members')->get();
-            }),
+            'owned' => Inertia::defer(fn () => Auth::user()->ownedGroups()->with('members')->get()),
+            'member' => Inertia::defer(fn () => Auth::user()->groups()->with(['owner', 'members'])->get()),
+            'all' => Inertia::defer(fn () => Group::with(['owner', 'members'])->get()),
         ]);
     }
 
