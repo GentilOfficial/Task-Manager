@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { Button } from '@/components/ui/button';
 import AuthBase from '@/layouts/AuthLayout.vue';
 import { Head, Link } from '@inertiajs/vue3';
