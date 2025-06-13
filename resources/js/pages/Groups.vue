@@ -5,7 +5,7 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem, Group } from '@/types';
 import { Deferred, Head } from '@inertiajs/vue3';
 
-const props = defineProps<{
+defineProps<{
     owned?: Group[];
     member?: Group[];
 }>();
