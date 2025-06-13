@@ -15,9 +15,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('groups', [GroupController::class, 'index'])->name('groups');
+    Route::get('groups', [GroupController::class, 'index'])->name('groups.user');
     Route::get('projects', [ProjectController::class, 'index'])->name('projects');
-    Route::get('assigned-tasks', [AssignedTasksController::class, 'index'])->name('assigned-tasks');
+    Route::get('assigned-tasks', [AssignedTasksController::class, 'index'])->name('tasks.assigned');
 });
 
 require __DIR__.'/settings.php';
