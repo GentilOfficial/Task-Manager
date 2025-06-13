@@ -15,9 +15,9 @@ class GroupController extends Controller
     public function index(Request $request)
     {
         return Inertia::render('Groups', [
+            'tab' => 'user-groups',
             'owned' => Inertia::defer(fn () => Auth::user()->ownedGroups()->with('members')->get()),
             'member' => Inertia::defer(fn () => Auth::user()->groups()->with(['owner', 'members'])->get()),
-            'all' => Inertia::defer(fn () => Group::with(['owner', 'members'])->get()),
         ]);
     }
 

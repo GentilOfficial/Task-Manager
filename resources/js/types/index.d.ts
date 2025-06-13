@@ -16,6 +16,10 @@ export interface NavItem {
     icon?: LucideIcon;
     activeIcon?: LucideIcon;
     isActive?: boolean;
+    items?: {
+        title: string;
+        url: string;
+    }[];
 }
 
 export type AppPageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
