@@ -3,6 +3,7 @@ import type { Config } from 'ziggy-js';
 
 export interface Auth {
     user: User;
+    projects: NavProjectItem[];
 }
 
 export interface BreadcrumbItem {
@@ -20,6 +21,12 @@ export interface NavItem {
         title: string;
         url: string;
     }[];
+}
+
+export interface NavProjectItem {
+    title: string;
+    href: string;
+    count?: number;
 }
 
 export type AppPageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {

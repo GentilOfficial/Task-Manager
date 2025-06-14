@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
+import NavProjects from '@/components/NavProjects.vue';
 import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
-import { type NavItem } from '@/types';
+import { type NavItem, NavProjectItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import {
     BookOpen,
@@ -46,6 +47,24 @@ const mainNavItems: NavItem[] = [
     },
 ];
 
+const mainNavProjects: NavProjectItem[] = [
+    {
+        title: 'Project 1',
+        href: '#',
+        count: 5,
+    },
+    {
+        title: 'Project 2',
+        href: '#',
+        count: 3,
+    },
+    {
+        title: 'Project 3',
+        href: '#',
+        count: 8,
+    },
+];
+
 const footerNavItems: NavItem[] = [
     {
         title: 'GitHub Repository',
@@ -76,6 +95,7 @@ const footerNavItems: NavItem[] = [
 
         <SidebarContent>
             <NavMain :items="mainNavItems" />
+            <NavProjects :projects="mainNavProjects" />
         </SidebarContent>
 
         <SidebarFooter>

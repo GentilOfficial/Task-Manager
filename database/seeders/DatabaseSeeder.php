@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
             $group->members()->sync($users->random(rand(2, 20))->pluck('id'));
         }
 
-        $projects = Project::factory(20)->make()->each(function ($project) use ($users) {
+        $projects = Project::factory(100)->make()->each(function ($project) use ($users) {
             $project->owner_id = $users->random()->id;
             $project->save();
         });

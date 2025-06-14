@@ -24,7 +24,7 @@ withDefaults(
 
 <template>
     <header
-        class="border-sidebar-border/70 z-20 flex h-16 shrink-0 items-center gap-2 border-b px-6 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 md:px-4"
+        class="z-20 flex h-16 shrink-0 items-center gap-2 border-b border-sidebar-border/70 px-6 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 md:px-4"
     >
         <div class="flex w-full items-center gap-2">
             <SidebarTrigger class="-ml-1" />
@@ -37,7 +37,7 @@ withDefaults(
                         <Button
                             variant="ghost"
                             size="icon"
-                            class="focus-within:ring-primary relative size-10 w-auto rounded-full p-1 focus-within:ring-2 hover:cursor-pointer"
+                            class="relative size-10 w-auto rounded-lg p-1 focus-within:ring-2 focus-within:ring-primary hover:cursor-pointer"
                         >
                             <UserInfo :user="auth.user" :show-info="false" />
                         </Button>

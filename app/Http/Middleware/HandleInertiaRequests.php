@@ -45,6 +45,17 @@ class HandleInertiaRequests extends Middleware
             'quote' => ['message' => trim($message), 'author' => trim($author)],
             'auth' => [
                 'user' => $request->user(),
+                'projects' => ! $request->user() ? null :
+                                $request->user()->ownedProjects()
+                                    ->withCount('tasks')
+                                    ->get()
+                                    ->map(function ($project) {
+                                        return [
+                                            'title' => $project->name,
+                                            'href' => '#' . $project->id, //route('projects.show', $project->id)
+                                            'count' => $project->tasks_count,
+                                        ];
+                                    }),
             ],
             'ziggy' => [
                 ...(new Ziggy)->toArray(),
