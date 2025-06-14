@@ -1,43 +1,26 @@
 <script setup lang="ts">
-import {
-    SidebarGroup,
-    SidebarGroupAction,
-    SidebarGroupLabel,
-    SidebarMenu,
-    SidebarMenuBadge,
-    SidebarMenuButton,
-    SidebarMenuItem,
-} from '@/components/ui/sidebar';
-import { type NavProjectItem } from '@/types';
+import { Badge } from '@/components/ui/badge';
+import { SidebarGroup, SidebarGroupAction, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { Link, usePage } from '@inertiajs/vue3';
-import { MoreHorizontal, Package, Plus } from 'lucide-vue-next';
-
-defineProps<{
-    projects: NavProjectItem[];
-}>();
+import { Package, Plus } from 'lucide-vue-next';
 
 const page = usePage();
+const projects = page.props.auth.projects;
 </script>
 
 <template>
-    <SidebarGroup>
+    <SidebarGroup class="group-data-[collapsible=icon]:hidden">
         <SidebarGroupLabel>Projects</SidebarGroupLabel>
         <SidebarGroupAction title="Add Project"> <Plus /> <span class="sr-only">Add Project</span> </SidebarGroupAction>
         <SidebarMenu>
             <SidebarMenuItem v-for="project in projects" :key="project.title">
-                <SidebarMenuButton as-child :tooltip="project.title" :is-active="project.href === page.url">
+                <SidebarMenuButton as-child :is-active="project.href === page.url">
                     <Link :href="project.href">
                         <Package />
-                        <span>{{ project.title }}</span>
-                    </Link>
-                </SidebarMenuButton>
-                <SidebarMenuBadge>{{ project.count }}</SidebarMenuBadge>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-                <SidebarMenuButton as-child tooltip="More projects" class="text-sidebar-foreground/70">
-                    <Link href="#">
-                        <MoreHorizontal class="text-sidebar-foreground/70" />
-                        <span>More</span>
+                        <span class="truncate">{{ project.title }}</span>
+                        <Badge variant="outline">
+                            <span class="max-w-12 truncate">{{ project.count && project.count <= 99 ? project.count : '99+' }}</span>
+                        </Badge>
                     </Link>
                 </SidebarMenuButton>
             </SidebarMenuItem>
