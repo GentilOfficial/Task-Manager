@@ -22,6 +22,12 @@ export interface NavItem {
     }[];
 }
 
+export interface NavProjectItem {
+    title: string;
+    href: string;
+    count?: number;
+}
+
 export type AppPageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     name: string;
     quote: { message: string; author: string };
