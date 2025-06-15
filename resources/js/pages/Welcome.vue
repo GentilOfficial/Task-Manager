@@ -220,11 +220,11 @@ const license = 'https://github.com/GentilOfficial/Task-Manager/blob/main/LICENS
         <div class="mx-auto max-w-7xl border-t border-sidebar-accent px-7 py-12 sm:py-24 md:px-12 xl:px-20">
             <section>
                 <div class="relative w-full text-center">
-                    <h2
-                        class="flex items-center justify-center gap-4 text-left text-3xl font-medium tracking-tighter sm:text-4xl md:text-center lg:text-5xl"
-                    >
+                    <h2 class="flex items-center justify-start gap-4 text-3xl font-medium tracking-tighter sm:text-4xl md:justify-center lg:text-5xl">
                         Made with love
-                        <HeartHandshake class="size-12 text-red-600 drop-shadow drop-shadow-red-400/50 dark:drop-shadow-red-600/50" />
+                        <HeartHandshake
+                            class="size-8 text-red-600 drop-shadow drop-shadow-red-400/50 sm:size-10 lg:size-12 dark:drop-shadow-red-600/50"
+                        />
                     </h2>
                     <p class="mx-auto mt-4 max-w-2xl text-left text-sm font-medium text-neutral-500 sm:text-base md:text-center md:text-balance">
                         Driven by a passion for programming and a desire to simplify teamwork, this tool is thoughtfully crafted to help you and your
