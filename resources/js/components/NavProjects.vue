@@ -9,7 +9,7 @@ const projects = page.props.auth.projects;
 </script>
 
 <template>
-    <SidebarGroup class="group-data-[collapsible=icon]:hidden">
+    <SidebarGroup>
         <SidebarGroupLabel>Projects</SidebarGroupLabel>
         <SidebarGroupAction title="Add Project"> <Plus /> <span class="sr-only">Add Project</span> </SidebarGroupAction>
         <SidebarMenu>
