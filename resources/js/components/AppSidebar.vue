@@ -78,19 +78,6 @@ const footerNavItems: NavItem[] = [
         <SidebarContent>
             <NavMain :items="mainNavItems" />
             <NavProjects />
-            <NavProjects />
-            <NavProjects />
-            <NavProjects />
-            <NavProjects />
-            <NavProjects />
-            <NavProjects />
-            <NavProjects />
-            <NavProjects />
-            <NavProjects />
-            <NavProjects />
-            <NavProjects />
-            <NavProjects />
-            <NavProjects />
         </SidebarContent>
 
         <SidebarFooter>
