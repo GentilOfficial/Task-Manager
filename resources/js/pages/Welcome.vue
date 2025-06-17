@@ -1,17 +1,10 @@
 <script setup lang="ts">
-import AppearanceTabs from '@/components/AppearanceTabs.vue';
+import AppearanceDropdown from '@/components/AppearanceDropdown.vue';
 import AppLogo from '@/components/AppLogo.vue';
 import AppLogoIcon from '@/components/AppLogoIcon.vue';
 import CharacterSvg from '@/components/CharacterSvg.vue';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
-import {
-    NavigationMenu,
-    NavigationMenuContent,
-    NavigationMenuItem,
-    NavigationMenuList,
-    NavigationMenuTrigger,
-} from '@/components/ui/navigation-menu';
+import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Head, Link } from '@inertiajs/vue3';
 import { ChartNoAxesColumn, Github, Handshake, HeartHandshake, History, Menu, Play, Users } from 'lucide-vue-next';
@@ -92,17 +85,10 @@ const license = 'https://github.com/GentilOfficial/Task-Manager/blob/main/LICENS
                     <AppLogoIcon class="size-8" />
                     <span class="text-md font-bold whitespace-nowrap">{{ $page.props.name }}</span>
                 </div>
-                <NavigationMenu class="hidden lg:block">
-                    <NavigationMenuList>
-                        <NavigationMenuItem class="rounded-lg">
-                            <NavigationMenuTrigger>Theme</NavigationMenuTrigger>
-                            <NavigationMenuContent>
-                                <AppearanceTabs />
-                            </NavigationMenuContent>
-                        </NavigationMenuItem>
-                    </NavigationMenuList>
-                </NavigationMenu>
-                <div :class="$page.props.auth.user ? 'flex' : 'hidden lg:flex'" class="items-center justify-end gap-4">
+                <div class="me-2 flex h-full w-full items-center justify-end lg:me-4">
+                    <AppearanceDropdown />
+                </div>
+                <div :class="$page.props.auth.user ? 'flex' : 'hidden lg:flex'" class="w-fit items-center justify-end gap-4">
                     <Button v-if="$page.props.auth.user" :as="Link" :href="route('dashboard')"> Dashboard </Button>
                     <template v-else>
                         <Button :as="Link" :href="route('register')" variant="outline"> Register </Button>
@@ -118,20 +104,11 @@ const license = 'https://github.com/GentilOfficial/Task-Manager/blob/main/LICENS
                         </SheetTrigger>
                         <SheetContent side="right" class="max-w-[450px] overflow-auto p-6">
                             <SheetTitle class="sr-only">Navigation Menu</SheetTitle>
-                            <SheetHeader class="flex flex-row items-center gap-1 px-0 py-4">
+                            <SheetHeader class="flex flex-row items-center gap-1 px-0 py-1">
                                 <AppLogo />
                                 <SheetDescription class="hidden">Navigation links</SheetDescription>
                             </SheetHeader>
-                            <Accordion type="single" collapsible>
-                                <AccordionItem value="item-1">
-                                    <AccordionTrigger>Theme</AccordionTrigger>
-                                    <AccordionContent>
-                                        <div class="flex items-center justify-center">
-                                            <AppearanceTabs />
-                                        </div>
-                                    </AccordionContent>
-                                </AccordionItem>
-                            </Accordion>
+                            <Separator />
                             <template v-if="!$page.props.auth.user">
                                 <Button :as="Link" :href="route('register')" variant="outline"> Register </Button>
                                 <Button :as="Link" :href="route('login')"> Log in </Button>
