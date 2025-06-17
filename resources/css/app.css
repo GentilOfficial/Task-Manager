@@ -213,7 +213,7 @@
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: var(--sidebar-foreground);
+        background: var(--muted-foreground);
     }
 
     .no-scrollbar::-webkit-scrollbar {
