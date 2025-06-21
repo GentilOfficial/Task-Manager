@@ -27,7 +27,7 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
-            if (app()->hasDebugModeEnabled() && in_array($response->getStatusCode(), [401, 402, 403, 404, 429, 500, 503])) {
+            if (!app()->hasDebugModeEnabled() && in_array($response->getStatusCode(), [401, 402, 403, 404, 429, 500, 503])) {
 
                 $sharedProps = (new HandleInertiaRequests)->share($request);
 

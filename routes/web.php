@@ -16,7 +16,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::get('groups', [GroupController::class, 'index'])->name('groups.user');
+
     Route::get('projects', [ProjectController::class, 'index'])->name('projects');
+    Route::get('projects/{project}', [ProjectController::class, 'show'])->name('project.show');
+
     Route::get('assigned-tasks', [AssignedTasksController::class, 'index'])->name('tasks.assigned');
 });
 

@@ -6,6 +6,10 @@ import { Package, Plus } from 'lucide-vue-next';
 
 const page = usePage();
 const projects = page.props.auth.projects;
+
+function onlyPath(url: string) {
+    return new URL(url).pathname;
+}
 </script>
 
 <template>
@@ -14,7 +18,7 @@ const projects = page.props.auth.projects;
         <SidebarGroupAction title="Add Project"> <Plus /> <span class="sr-only">Add Project</span> </SidebarGroupAction>
         <SidebarMenu>
             <SidebarMenuItem v-for="project in projects" :key="project.title">
-                <SidebarMenuButton as-child :is-active="project.href === page.url">
+                <SidebarMenuButton as-child :is-active="onlyPath(project.href) === page.url">
                     <Link :href="project.href">
                         <Package />
                         <span class="truncate">{{ project.title }}</span>

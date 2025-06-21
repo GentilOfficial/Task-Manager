@@ -104,7 +104,6 @@
             'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     }
 
-    /* Override specifico per iOS password bullet */
     input[type='password'] {
         font-family:
             system-ui,
@@ -198,30 +197,26 @@
     body {
         @apply bg-background text-foreground;
     }
+}
 
-    ::-webkit-scrollbar {
-        width: 0.25svw;
-    }
+::-webkit-scrollbar {
+    width: 5px;
+}
 
-    ::-webkit-scrollbar-track {
-        background: transparent;
-    }
+::-webkit-scrollbar-track {
+    background: transparent;
+}
 
-    ::-webkit-scrollbar-thumb {
-        background: var(--sidebar-border);
-        border-radius: 0.25svw;
-    }
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 5px;
+}
 
-    ::-webkit-scrollbar-thumb:hover {
-        background: var(--muted-foreground);
-    }
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+}
 
-    .no-scrollbar::-webkit-scrollbar {
-        display: none;
-    }
-
-    .no-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
+::-webkit-scrollbar-corner {
+    background-color: transparent;
 }

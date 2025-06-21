@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Auth;
 
 class ProjectController extends Controller
 {
@@ -13,7 +14,10 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Projects');
+        return Inertia::render('projects/Projects', [
+            'owned' => Inertia::defer(fn () => Auth::user()->ownedProjects()->with('users')->get()),
+            'member' => Inertia::defer(fn () => Auth::user()->projects()->with(['owner', 'users'])->get()),
+        ]);
     }
 
     /**
@@ -37,7 +41,9 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return Inertia::render('projects/ProjectDashboard', [
+            'project' => $project,
+        ]);
     }
 
     /**

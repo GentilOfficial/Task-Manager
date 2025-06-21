@@ -95,7 +95,7 @@ const license = 'https://github.com/GentilOfficial/Task-Manager/blob/main/LICENS
                         <Button :as="Link" :href="route('login')"> Log in </Button>
                     </template>
                 </div>
-                <div class="lg:hidden">
+                <div v-if="!$page.props.auth.user" class="lg:hidden">
                     <Sheet>
                         <SheetTrigger :as-child="true">
                             <Button variant="ghost" size="icon" class="inline-flex items-center justify-center p-2">
@@ -109,10 +109,8 @@ const license = 'https://github.com/GentilOfficial/Task-Manager/blob/main/LICENS
                                 <SheetDescription class="hidden">Navigation links</SheetDescription>
                             </SheetHeader>
                             <Separator />
-                            <template v-if="!$page.props.auth.user">
-                                <Button :as="Link" :href="route('register')" variant="outline"> Register </Button>
-                                <Button :as="Link" :href="route('login')"> Log in </Button>
-                            </template>
+                            <Button :as="Link" :href="route('register')" variant="outline"> Register </Button>
+                            <Button :as="Link" :href="route('login')"> Log in </Button>
                         </SheetContent>
                     </Sheet>
                 </div>
