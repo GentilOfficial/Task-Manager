@@ -31,18 +31,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Esempio: setup Node.js per JS/TS (decommenta se serve)
-      # - name: Setup Node.js
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: '20'
-
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
-          # queries: security-extended,security-and-quality
 
       - name: Manual build (if required)
         if: matrix.build-mode == 'manual'
