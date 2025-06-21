@@ -52,7 +52,7 @@ class HandleInertiaRequests extends Middleware
                                     ->map(function ($project) {
                                         return [
                                             'title' => $project->name,
-                                            'href' => '#' . $project->id, //route('projects.show', $project->id)
+                                            'href' => route('project.show', $project),
                                             'count' => $project->tasks_count,
                                         ];
                                     }),
