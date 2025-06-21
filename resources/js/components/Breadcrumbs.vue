@@ -14,7 +14,7 @@ defineProps<{
 
 <template>
     <Breadcrumb>
-        <BreadcrumbList>
+        <BreadcrumbList class="flex-nowrap overflow-x-scroll whitespace-nowrap">
             <template v-for="(item, index) in breadcrumbs" :key="index">
                 <BreadcrumbItem>
                     <template v-if="index === breadcrumbs.length - 1">
@@ -28,6 +28,11 @@ defineProps<{
                 </BreadcrumbItem>
                 <BreadcrumbSeparator v-if="index !== breadcrumbs.length - 1" />
             </template>
+            <BreadcrumbSeparator />
+            <BreadcrumbPage
+                >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat ipsa aperiam ratione architecto sunt labore soluta officiis? Quam
+                commodi iure aperiam ea temporibus minus dolorem. Voluptatum dicta minima provident ratione.</BreadcrumbPage
+            >
         </BreadcrumbList>
     </Breadcrumb>
 </template>

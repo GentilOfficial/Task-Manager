@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import Breadcrumbs from '@/components/Breadcrumbs.vue';
-import { Button } from '@/components/ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { SidebarTrigger } from '@/components/ui/sidebar';
-import UserInfo from '@/components/UserInfo.vue';
-import UserMenuContent from '@/components/UserMenuContent.vue';
 import type { BreadcrumbItemType } from '@/types';
 import { usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
@@ -31,22 +27,6 @@ withDefaults(
             <template v-if="breadcrumbs && breadcrumbs.length > 0">
                 <Breadcrumbs :breadcrumbs="breadcrumbs" class="w-full" />
             </template>
-            <div class="-mr-1 flex items-center justify-end">
-                <DropdownMenu>
-                    <DropdownMenuTrigger :as-child="true">
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            class="relative size-10 w-auto rounded-lg p-1 focus-within:ring-2 focus-within:ring-primary hover:cursor-pointer"
-                        >
-                            <UserInfo :user="auth.user" :show-info="false" />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" class="w-56">
-                        <UserMenuContent :user="auth.user" />
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            </div>
         </div>
     </header>
 </template>
