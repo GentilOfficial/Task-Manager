@@ -2,13 +2,9 @@ name: tests
 
 on:
   push:
-    branches:
-      - develop
-      - main
+    branches: [dev, main]
   pull_request:
-    branches:
-      - develop
-      - main
+    branches: [dev, main]
 
 permissions:
   contents: read
@@ -20,6 +16,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -37,8 +41,8 @@ jobs:
       - name: Install Node Dependencies
         run: npm ci
 
-      - name: Install Dependencies
-        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+      - name: Install Composer Dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader --no-scripts
 
       - name: Copy Environment File
         run: cp .env.example .env
@@ -52,5 +56,5 @@ jobs:
       - name: Build Assets
         run: npm run build
 
-      - name: Tests
-        run: ./vendor/bin/pest
+      - name: Run Tests
+        run: ./vendor/bin/pest --colors=always
