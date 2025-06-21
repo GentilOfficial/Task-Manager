@@ -43,6 +43,7 @@ class ProjectController extends Controller
     {
         return Inertia::render('projects/ProjectDashboard', [
             'project' => $project,
+            'tasks' => Inertia::defer(fn () => $project->tasks()->with(['assignedTo'])->get())
         ]);
     }
 
