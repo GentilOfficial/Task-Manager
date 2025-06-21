@@ -3,10 +3,8 @@ import Breadcrumbs from '@/components/Breadcrumbs.vue';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import type { BreadcrumbItemType } from '@/types';
 import { usePage } from '@inertiajs/vue3';
-import { computed } from 'vue';
 
 const page = usePage();
-const auth = computed(() => page.props.auth);
 
 withDefaults(
     defineProps<{

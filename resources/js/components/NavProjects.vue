@@ -8,11 +8,7 @@ const page = usePage();
 const projects = page.props.auth.projects;
 
 function onlyPath(url: string) {
-    try {
-        return new URL(url).pathname;
-    } catch (e) {
-        return url;
-    }
+    return new URL(url).pathname;
 }
 </script>
 

@@ -104,19 +104,21 @@ const lastItem = computed(() => items.slice(-Math.min(itemsToDisplay, items.leng
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
             </template>
-            <BreadcrumbItem class="max-w-[45svw]" v-if="items.length > 1" v-for="(item, index) of lastItem" :key="item.title">
-                <template v-if="index === lastItem.length - 1">
-                    <BreadcrumbPage class="truncate">
-                        {{ item.title }}
-                    </BreadcrumbPage>
-                </template>
-                <template v-else>
-                    <BreadcrumbLink as-child class="truncate">
-                        <Link :href="item.href ?? '#'">{{ item.title }}</Link>
-                    </BreadcrumbLink>
-                </template>
-                <BreadcrumbSeparator v-if="index !== lastItem.length - 1" />
-            </BreadcrumbItem>
+            <template v-if="items.length > 1">
+                <BreadcrumbItem class="max-w-[45svw]" v-for="(item, index) of lastItem" :key="item.title">
+                    <template v-if="index === lastItem.length - 1">
+                        <BreadcrumbPage class="truncate">
+                            {{ item.title }}
+                        </BreadcrumbPage>
+                    </template>
+                    <template v-else>
+                        <BreadcrumbLink as-child class="truncate">
+                            <Link :href="item.href ?? '#'">{{ item.title }}</Link>
+                        </BreadcrumbLink>
+                    </template>
+                    <BreadcrumbSeparator v-if="index !== lastItem.length - 1" />
+                </BreadcrumbItem>
+            </template>
         </BreadcrumbList>
     </Breadcrumb>
 </template>
