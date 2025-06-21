@@ -2,9 +2,6 @@
 import Breadcrumbs from '@/components/Breadcrumbs.vue';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import type { BreadcrumbItemType } from '@/types';
-import { usePage } from '@inertiajs/vue3';
-
-const page = usePage();
 
 withDefaults(
     defineProps<{
