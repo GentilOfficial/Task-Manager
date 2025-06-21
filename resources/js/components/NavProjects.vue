@@ -22,7 +22,7 @@ function onlyPath(url: string) {
                     <Link :href="project.href">
                         <Package />
                         <span class="truncate">{{ project.title }}</span>
-                        <Badge variant="outline">
+                        <Badge>
                             <span class="max-w-12 truncate">{{ project.count && project.count <= 99 ? project.count : '99+' }}</span>
                         </Badge>
                     </Link>
