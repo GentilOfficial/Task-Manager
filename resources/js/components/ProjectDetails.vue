@@ -18,7 +18,7 @@ defineProps<{
             </div>
         </div>
         <CardHeader class="grow px-0">
-            <CardTitle class="w-full truncate">{{ project.name }}</CardTitle>
+            <CardTitle class="w-full truncate leading-5">{{ project.name }}</CardTitle>
             <CardDescription class="w-full truncate">
                 {{ project?.description }}
             </CardDescription>
