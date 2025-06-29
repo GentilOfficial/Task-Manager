@@ -39,7 +39,25 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Project $project)
+    public function showTasks(Project $project)
+    {
+        return Inertia::render('projects/ProjectDashboard', [
+            'project' => $project,
+            'users' => Inertia::defer(fn () => $project->users),
+            'tasks' => Inertia::defer(fn () => $project->tasks()->with(['assignedTo'])->get())
+        ]);
+    }
+
+    public function showUsers(Project $project)
+    {
+        return Inertia::render('projects/ProjectDashboard', [
+            'project' => $project,
+            'users' => Inertia::defer(fn () => $project->users),
+            'tasks' => Inertia::defer(fn () => $project->tasks()->with(['assignedTo'])->get())
+        ]);
+    }
+
+    public function showSettings(Project $project)
     {
         return Inertia::render('projects/ProjectDashboard', [
             'project' => $project,

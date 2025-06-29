@@ -24,7 +24,7 @@ defineProps<{
             </CardDescription>
         </CardHeader>
         <CardAction>
-            <Button :as="Link" :href="route('project.show', { project })" size="icon" class="size-6">
+            <Button :as="Link" :href="route('project.tasks', { project })" size="icon" class="size-6">
                 <FolderSymlink />
             </Button>
         </CardAction>

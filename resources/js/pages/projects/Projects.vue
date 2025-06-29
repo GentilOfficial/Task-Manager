@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CreateProjectForm from '@/components/CreateProjectForm.vue';
 import LoadingSpinner from '@/components/LoadingSpinner.vue';
 import ProjectDetails from '@/components/ProjectDetails.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
@@ -18,6 +19,7 @@ const breadcrumbs: BreadcrumbItem[] = [{ title: 'Projects', href: route('project
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
+            <CreateProjectForm />
             <h2 class="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">Owned Projects</h2>
             <Deferred data="owned">
                 <template #fallback>
