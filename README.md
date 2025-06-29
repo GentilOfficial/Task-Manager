@@ -10,16 +10,15 @@
 
 **Task Manager** is a Laravel-based web application that helps teams and individuals organize and manage their project tasks in a modern, efficient way. It runs on **Laravel 12**, **Vue 3**, and **Inertia.js 2**.
 
-With this app, you can create groups, start projects, assign tasks to people or teams, and track progress — all through responsive interface built using **Tailwind CSS** and **shadcn-vue** components.
+With this app, you can start projects, assign tasks to people, and track progress — all through responsive interface built using **Tailwind CSS** and **shadcn-vue** components.
 
 ---
 
 ## ✨ What You Can Do
 
 * 🔐 Log in and manage your account
-* 👥 Create groups and manage members
 * 📁 Create new projects
-* 🔗 Link projects to specific users or entire groups
+* 🔗 Link projects to specific users
 * ✅ Add tasks to projects
 * 👨‍👩‍👧‍👦 Assign tasks to individual users
 * 🧾 View a personal list of tasks assigned to you
@@ -90,15 +89,10 @@ composer run dev
 
 * Login and register your user
 
-### 👥 Groups
-
-* Create and manage groups
-* Add users to groups
-
 ### 📁 Projects
 
 * Create projects
-* Assign them to users or groups
+* Assign them to users
 
 ### ✅ Tasks
 
