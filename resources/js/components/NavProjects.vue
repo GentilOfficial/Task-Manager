@@ -15,7 +15,7 @@ function onlyPath(url: string) {
 <template>
     <SidebarGroup>
         <SidebarGroupLabel>Projects</SidebarGroupLabel>
-        <SidebarGroupAction title="Add Project"> <Plus /> <span class="sr-only">Add Project</span> </SidebarGroupAction>
+        <SidebarGroupAction title="Add Project"> <Plus class="size-4" /> <span class="sr-only">Add Project</span> </SidebarGroupAction>
         <SidebarMenu>
             <SidebarMenuItem v-for="project in projects" :key="project.title">
                 <SidebarMenuButton as-child :is-active="onlyPath(project.href) === page.url">
