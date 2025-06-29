@@ -77,7 +77,11 @@ const breadcrumbs: BreadcrumbItem[] = [
                     </div>
                 </template>
                 <div class="rounded-lg border bg-accent p-4 shadow-inner">
-                    <pre class="max-h-96 overflow-auto">{{ users }}</pre>
+                    <pre class="max-h-96 overflow-auto">
+                        <code>
+                            {{ users }}
+                        </code>
+                    </pre>
                 </div>
             </Deferred>
 
@@ -89,7 +93,11 @@ const breadcrumbs: BreadcrumbItem[] = [
                     </div>
                 </template>
                 <div class="rounded-lg border bg-accent p-4 shadow-inner">
-                    <pre class="max-h-96 overflow-auto">{{ tasks }}</pre>
+                    <pre>
+                        <code>
+                            {{ tasks }}
+                        </code>
+                    </pre>
                 </div>
             </Deferred>
         </div>

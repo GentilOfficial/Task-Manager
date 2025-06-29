@@ -33,7 +33,18 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $project = Project::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'owner_id' => $request->user()->id,
+        ]);
+
+        $users = $request->input('users', []);
+        $users[] = $request->user()->id;
+
+        $project->users()->attach(array_unique($users));
+
+        return redirect()->route('project.tasks', $project);
     }
 
     /**

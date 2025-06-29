@@ -17,6 +17,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::prefix('projects')->group(function () {
         Route::get('/', [ProjectController::class, 'index'])->name('projects');
+        Route::post('/', [ProjectController::class, 'store'])->name('projects.store');
 
         Route::redirect('/projects/{project}', '/projects/{project}/tasks');
 
