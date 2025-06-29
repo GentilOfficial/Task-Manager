@@ -46,19 +46,9 @@ class User extends Authenticatable
         ];
     }
 
-    public function ownedGroups()
-    {
-        return $this->hasMany(Group::class, 'owner_id');
-    }
-
     public function ownedProjects()
     {
         return $this->hasMany(Project::class, 'owner_id');
-    }
-
-    public function groups()
-    {
-        return $this->belongsToMany(Group::class)->withTimestamps();
     }
 
     public function projects()

@@ -28,15 +28,6 @@ class DatabaseSeeder extends Seeder
 
         $users = $users->prepend($devUser);
 
-        $groups = Group::factory(100)->make()->each(function ($group) use ($users) {
-            $group->owner_id = $users->random()->id;
-            $group->save();
-        });
-
-        foreach ($groups as $group) {
-            $group->members()->sync($users->random(rand(2, 20))->pluck('id'));
-        }
-
         $projects = Project::factory(100)->make()->each(function ($project) use ($users) {
             $project->owner_id = $users->random()->id;
             $project->save();
