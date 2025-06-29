@@ -15,12 +15,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('groups', [GroupController::class, 'index'])->name('groups.user');
+    Route::prefix('projects')->group(function () {
+        Route::get('/', [ProjectController::class, 'index'])->name('projects');
 
-    Route::get('projects', [ProjectController::class, 'index'])->name('projects');
-    Route::get('projects/{project}', [ProjectController::class, 'show'])->name('project.show');
+        Route::redirect('/projects/{project}', '/projects/{project}/tasks');
+
+        Route::get('/projects/{project}/tasks', [ProjectController::class, 'showTasks'])->name('project.tasks');
+        Route::get('/projects/{project}/users', [ProjectController::class, 'showUsers'])->name('project.users');
+        Route::get('/projects/{project}/settings', [ProjectController::class, 'showSettings'])->name('project.settings');
+    });
 
     Route::get('assigned-tasks', [AssignedTasksController::class, 'index'])->name('tasks.assigned');
+
 });
 
 require __DIR__.'/settings.php';
