@@ -6,13 +6,21 @@ import { h } from 'vue';
 import * as z from 'zod';
 
 import { Button } from '@/components/ui/button';
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { toast } from 'vue-sonner';
 
 const formSchema = toTypedSchema(
     z.object({
-        username: z.string().min(2).max(50),
+        name: z.string(),
+        description: z.string().optional(),
+        users: z
+            .array(
+                z.object({
+                    id: z.number(),
+                }),
+            )
+            .optional(),
     }),
 );
 
@@ -21,6 +29,7 @@ const { isFieldDirty, handleSubmit } = useForm({
 });
 
 const onSubmit = handleSubmit((values) => {
+    // router.post(route('projects.store'), values);
     toast('You submitted the following values:', {
         description: h(
             'pre',
@@ -33,13 +42,21 @@ const onSubmit = handleSubmit((values) => {
 
 <template>
     <form class="w-2/3 space-y-6" @submit="onSubmit">
-        <FormField v-slot="{ componentField }" name="username" :validate-on-blur="!isFieldDirty">
+        <FormField v-slot="{ componentField }" name="name" :validate-on-blur="!isFieldDirty">
             <FormItem v-auto-animate>
-                <FormLabel>Username</FormLabel>
+                <FormLabel>Name</FormLabel>
                 <FormControl>
-                    <Input type="text" placeholder="shadcn" v-bind="componentField" />
+                    <Input type="text" v-bind="componentField" />
                 </FormControl>
-                <FormDescription> This is your public display name. </FormDescription>
+                <FormMessage />
+            </FormItem>
+        </FormField>
+        <FormField v-slot="{ componentField }" name="description" :validate-on-blur="!isFieldDirty">
+            <FormItem v-auto-animate>
+                <FormLabel>Description</FormLabel>
+                <FormControl>
+                    <Input type="text" v-bind="componentField" />
+                </FormControl>
                 <FormMessage />
             </FormItem>
         </FormField>

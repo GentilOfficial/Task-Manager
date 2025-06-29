@@ -125,7 +125,7 @@ const license = 'https://github.com/GentilOfficial/Task-Manager/blob/main/LICENS
                 <div class="w-full lg:w-1/2">
                     <h1 class="text-left text-6xl font-bold tracking-tighter text-balance sm:text-center sm:text-7xl md:text-8xl lg:text-left">
                         <span class="block origin-left text-nowrap">
-                            <span class="text-red-600 drop-shadow drop-shadow-red-800/50">Less</span>
+                            <span class="text-primary drop-shadow drop-shadow-primary/50">Less</span>
                             <span
                                 class="bg-gradient-to-b from-neutral-950 to-neutral-400 bg-clip-text px-1 text-transparent dark:from-neutral-100 dark:to-neutral-700"
                             >
@@ -138,7 +138,7 @@ const license = 'https://github.com/GentilOfficial/Task-Manager/blob/main/LICENS
                             >
                                 Reach
                             </span>
-                            <span class="text-green-600 drop-shadow drop-shadow-green-800/50">More</span>
+                            <span class="text-primary drop-shadow drop-shadow-primary/50">More</span>
                         </span>
                     </h1>
                     <p
@@ -152,7 +152,7 @@ const license = 'https://github.com/GentilOfficial/Task-Manager/blob/main/LICENS
                     </div>
                 </div>
                 <div class="mt-12 flex w-full items-center justify-center text-foreground lg:mt-0 lg:w-1/2">
-                    <CharacterSvg class="relative w-full max-w-[450px] drop-shadow drop-shadow-neutral-500/75 lg:scale-125 xl:translate-x-6" />
+                    <CharacterSvg class="relative w-full max-w-[450px] drop-shadow drop-shadow-foreground/25 lg:scale-125 xl:translate-x-6" />
                 </div>
             </div>
             <div class="flex w-full flex-shrink-0 items-center border-t border-sidebar-accent lg:h-[150px]">
@@ -180,7 +180,7 @@ const license = 'https://github.com/GentilOfficial/Task-Manager/blob/main/LICENS
                 <div class="text-center">
                     <div class="mt-12 grid grid-cols-2 gap-x-6 gap-y-12 text-center lg:mt-16 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-16">
                         <div v-for="(item, i) in features" :key="i">
-                            <div class="mx-auto flex size-12 items-center justify-center rounded-full bg-secondary/75">
+                            <div class="mx-auto flex size-12 items-center justify-center rounded-full bg-secondary/75 text-secondary-foreground">
                                 <component :is="item.icon" />
                             </div>
                             <div class="mt-6">

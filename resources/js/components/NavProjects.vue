@@ -19,9 +19,11 @@ function onlyPath(url: string) {
         <SidebarMenu>
             <SidebarMenuItem v-for="project in projects" :key="project.title">
                 <SidebarMenuButton as-child :is-active="onlyPath(project.href) === page.url">
-                    <Link :href="project.href">
-                        <Package />
-                        <span class="truncate">{{ project.title }}</span>
+                    <Link :href="project.href" class="flex items-center justify-between">
+                        <p class="flex items-center gap-2">
+                            <Package class="size-5" />
+                            <span class="truncate">{{ project.title }}</span>
+                        </p>
                         <Badge>
                             <span class="max-w-12 truncate">{{ project.count && project.count <= 99 ? project.count : '99+' }}</span>
                         </Badge>
